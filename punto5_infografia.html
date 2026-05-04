@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infografía: Gobierno y Gestión de Proyectos TI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --border: rgba(255,255,255,0.1);
+            --q1-color: #f43f5e; /* Rose */
+            --q2-color: #3b82f6; /* Blue */
+            --q3-color: #10b981; /* Emerald */
+            --q4-color: #f59e0b; /* Amber */
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg);
+            color: #f8fafc;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            padding: 1.5rem;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, #fff, #cbd5e1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 1.5rem;
+            flex: 1;
+            height: calc(100vh - 100px);
+        }
+        .card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 5px;
+        }
+        .card:nth-child(1)::before { background: var(--q1-color); }
+        .card:nth-child(2)::before { background: var(--q2-color); }
+        .card:nth-child(3)::before { background: var(--q3-color); }
+        .card:nth-child(4)::before { background: var(--q4-color); }
+
+        .card h2 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .card:nth-child(1) h2 { color: var(--q1-color); }
+        .card:nth-child(2) h2 { color: var(--q2-color); }
+        .card:nth-child(3) h2 { color: var(--q3-color); }
+        .card:nth-child(4) h2 { color: var(--q4-color); }
+
+        /* Q1: Cascada */
+        .cascade-flow {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            align-items: center;
+            height: 100%;
+            justify-content: center;
+        }
+        .cascade-item {
+            background: rgba(244, 63, 94, 0.1);
+            border: 1px solid rgba(244, 63, 94, 0.3);
+            padding: 0.8rem 2rem;
+            border-radius: 8px;
+            width: 80%;
+            text-align: center;
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+        }
+        .cascade-arrow {
+            color: var(--q1-color);
+            font-size: 1.2rem;
+        }
+
+        /* Q2: Gobierno vs Gestión */
+        .vs-container {
+            display: flex;
+            gap: 1rem;
+            height: 100%;
+        }
+        .vs-box {
+            flex: 1;
+            background: rgba(255,255,255,0.03);
+            border-radius: 12px;
+            padding: 1rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .vs-box h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+        .vs-box p { font-size: 0.85rem; color: #94a3b8; line-height: 1.4; }
+        .vs-divider {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            color: var(--q2-color);
+            font-size: 1.5rem;
+        }
+        .tag {
+            display: inline-block;
+            margin-top: 0.5rem;
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+        .tag-gov { background: rgba(59, 130, 246, 0.2); color: #60a5fa; }
+        .tag-mgt { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+
+        /* Q3: Estructuras */
+        .org-chart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100%;
+            justify-content: center;
+            gap: 1rem;
+        }
+        .org-level {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            width: 100%;
+        }
+        .org-node {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid var(--q3-color);
+            padding: 0.7rem 1.5rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-align: center;
+        }
+        .org-line {
+            width: 2px;
+            height: 15px;
+            background: var(--q3-color);
+            margin: -0.5rem auto;
+        }
+        .org-hline {
+            width: 150px;
+            height: 2px;
+            background: var(--q3-color);
+            margin: -0.5rem auto;
+        }
+
+        /* Q4: Desempeño */
+        .perf-container {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            justify-content: space-around;
+        }
+        .perf-levels {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            height: 80px;
+            padding: 0 1rem;
+            border-bottom: 2px solid rgba(255,255,255,0.1);
+        }
+        .level-bar {
+            width: 15%;
+            background: var(--q4-color);
+            border-radius: 4px 4px 0 0;
+            text-align: center;
+            font-size: 0.7rem;
+            font-weight: 700;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 5px;
+            color: #000;
+            opacity: 0.8;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .level-bar:hover { opacity: 1; transform: scaleY(1.1); transform-origin: bottom; }
+        .perf-metrics {
+            display: flex;
+            gap: 1rem;
+        }
+        .metric-box {
+            flex: 1;
+            background: rgba(245, 158, 11, 0.1);
+            padding: 0.8rem;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+        .metric-box h4 { font-size: 0.9rem; color: var(--q4-color); margin-bottom: 0.3rem;}
+        .metric-box p { font-size: 0.75rem; color: #cbd5e1; }
+
+        @media (max-width: 900px) {
+            .grid-container { grid-template-columns: 1fr; grid-template-rows: auto; height: auto; }
+            body { height: auto; overflow: auto; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Infografía: Síntesis de Gobierno y Gestión TI</h1>
+    </header>
+
+    <div class="grid-container">
+        
+        <!-- Cascada de Metas -->
+        <div class="card">
+            <h2>1. Cascada de Metas (COBIT)</h2>
+            <div class="cascade-flow">
+                <div class="cascade-item">Factores del Entorno & Interesados</div>
+                <div class="cascade-arrow">▼</div>
+                <div class="cascade-item">Metas Empresariales (Estratégicas)</div>
+                <div class="cascade-arrow">▼</div>
+                <div class="cascade-item">Metas de Alineamiento (TI)</div>
+                <div class="cascade-arrow">▼</div>
+                <div class="cascade-item">Objetivos de Gobierno y Gestión</div>
+            </div>
+        </div>
+
+        <!-- Gobierno vs Gestión -->
+        <div class="card">
+            <h2>2. Gobierno vs. Gestión</h2>
+            <div class="vs-container">
+                <div class="vs-box" style="border-top: 3px solid #3b82f6;">
+                    <h3>Gobierno de TI</h3>
+                    <p>Asegura la creación de valor evaluando las necesidades, dirigiendo prioridades y monitorizando el cumplimiento.</p>
+                    <span class="tag tag-gov">Evaluar, Dirigir, Monitorizar (EDM)</span>
+                    <p style="margin-top:10px; font-weight:bold; color:#e2e8f0; font-size:0.8rem;">Responsable: Junta Directiva</p>
+                </div>
+                <div class="vs-divider">VS</div>
+                <div class="vs-box" style="border-top: 3px solid #10b981;">
+                    <h3>Gestión de TI</h3>
+                    <p>Planifica, construye, ejecuta y controla las actividades alineadas con la dirección establecida por el gobierno.</p>
+                    <span class="tag tag-mgt">Planificar, Construir, Ejecutar (PBRM)</span>
+                    <p style="margin-top:10px; font-weight:bold; color:#e2e8f0; font-size:0.8rem;">Responsable: Gerencia Ejecutiva</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Estructuras Organizacionales -->
+        <div class="card">
+            <h2>3. Estructuras Organizacionales Típicas</h2>
+            <div class="org-chart">
+                <div class="org-node" style="background: rgba(16,185,129,0.3); font-weight:bold;">Junta Directiva / Consejo de Adm.</div>
+                <div class="org-line"></div>
+                <div class="org-node">Comité Ejecutivo (CEO, CFO, COO)</div>
+                <div class="org-line"></div>
+                <div class="org-hline"></div>
+                <div class="org-level" style="margin-top:-0.5rem;">
+                    <div class="org-line" style="margin: 0; height:15px;"></div>
+                    <div class="org-line" style="margin: 0; height:15px;"></div>
+                </div>
+                <div class="org-level">
+                    <div class="org-node" style="border-color:#34d399;">CIO (Director de TI)</div>
+                    <div class="org-node" style="border-color:#34d399;">PMO (Oficina de Proyectos)</div>
+                </div>
+                <p style="font-size:0.8rem; text-align:center; color:#94a3b8; margin-top:10px;">
+                    *Estas estructuras garantizan la separación de responsabilidades entre gobernar y gestionar.
+                </p>
+            </div>
+        </div>
+
+        <!-- Gestión del Desempeño -->
+        <div class="card">
+            <h2>4. Gestión del Desempeño (COBIT)</h2>
+            <div class="perf-container">
+                <p style="font-size:0.85rem; color:#cbd5e1; text-align:center;">Modelo de Capacidad de Procesos (Niveles 0 a 5)</p>
+                <div class="perf-levels">
+                    <div class="level-bar" style="height: 10%;" title="Nivel 0: Incompleto">0</div>
+                    <div class="level-bar" style="height: 30%;" title="Nivel 1: Realizado">1</div>
+                    <div class="level-bar" style="height: 50%;" title="Nivel 2: Gestionado">2</div>
+                    <div class="level-bar" style="height: 70%;" title="Nivel 3: Establecido">3</div>
+                    <div class="level-bar" style="height: 90%;" title="Nivel 4: Predecible">4</div>
+                    <div class="level-bar" style="height: 100%;" title="Nivel 5: Optimizado">5</div>
+                </div>
+                <div style="display:flex; justify-content:space-between; font-size:0.7rem; color:#94a3b8; margin-bottom:10px;">
+                    <span>Incompleto</span>
+                    <span>Optimizado</span>
+                </div>
+                <div class="perf-metrics">
+                    <div class="metric-box">
+                        <h4>Métricas Lag (Rezagadas)</h4>
+                        <p>Miden el resultado tras la ejecución (Ej: ROI del proyecto).</p>
+                    </div>
+                    <div class="metric-box">
+                        <h4>Métricas Lead (Adelantadas)</h4>
+                        <p>Indicadores predictivos del éxito futuro (Ej: % hitos a tiempo).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

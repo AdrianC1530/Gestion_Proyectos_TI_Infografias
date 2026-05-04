@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividad 3: Componentes de un Sistema de Gobierno</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --accent-1: #00f2fe;
+            --accent-2: #4facfe;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: radial-gradient(circle at top right, #1a2035, var(--bg-color));
+            color: var(--text-main);
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        header {
+            text-align: center;
+            padding: 1.5rem 0;
+            background: rgba(0,0,0,0.2);
+            border-bottom: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+        }
+        h1 {
+            font-size: 2rem;
+            background: linear-gradient(to right, var(--accent-1), var(--accent-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .container {
+            display: flex;
+            flex: 1;
+            padding: 2rem;
+            gap: 2rem;
+            height: calc(100vh - 80px);
+        }
+        .left-panel {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--glass-bg);
+            border-radius: 24px;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            backdrop-filter: blur(12px);
+            position: relative;
+            overflow: hidden;
+        }
+        .right-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            background: var(--glass-bg);
+            border-radius: 24px;
+            border: 1px solid var(--glass-border);
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            backdrop-filter: blur(12px);
+            overflow-y: auto;
+        }
+        .right-panel::-webkit-scrollbar {
+            width: 8px;
+        }
+        .right-panel::-webkit-scrollbar-thumb {
+            background: var(--glass-border);
+            border-radius: 4px;
+        }
+        .paragraph {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1.2rem;
+            border-radius: 16px;
+            border-left: 4px solid var(--accent-2);
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+        .paragraph:hover {
+            transform: translateX(10px);
+            background: rgba(255, 255, 255, 0.08);
+            border-left-color: var(--accent-1);
+        }
+        .paragraph strong {
+            color: var(--accent-1);
+            font-size: 1.1rem;
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+        .paragraph p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--text-muted);
+            text-align: justify;
+        }
+        svg circle {
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+        svg circle:hover {
+            filter: drop-shadow(0 0 15px var(--accent-1));
+            stroke: var(--accent-1);
+            stroke-width: 5;
+        }
+        .node-text {
+            pointer-events: none;
+        }
+        @media (max-width: 900px) {
+            .container { flex-direction: column; overflow-y: auto; height: auto; }
+            body { height: auto; overflow: auto; }
+            .left-panel { min-height: 400px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Componentes de un Sistema de Gobierno</h1>
+    </header>
+    <div class="container">
+        <!-- Mapa Conceptual -->
+        <div class="left-panel">
+            <svg viewBox="0 0 800 600" width="100%" height="100%">
+                <defs>
+                    <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#00f2fe" />
+                        <stop offset="100%" stop-color="#4facfe" />
+                    </linearGradient>
+                    <filter id="glow">
+                        <feGaussianBlur stdDeviation="3.5" result="coloredBlur"/>
+                        <feMerge>
+                            <feMergeNode in="coloredBlur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                </defs>
+
+                <!-- Conexiones -->
+                <line x1="400" y1="300" x2="400" y2="120" stroke="url(#lineGrad)" stroke-width="4" opacity="0.6"/>
+                <line x1="400" y1="300" x2="571" y2="244" stroke="url(#lineGrad)" stroke-width="4" opacity="0.6"/>
+                <line x1="400" y1="300" x2="505" y2="445" stroke="url(#lineGrad)" stroke-width="4" opacity="0.6"/>
+                <line x1="400" y1="300" x2="294" y2="445" stroke="url(#lineGrad)" stroke-width="4" opacity="0.6"/>
+                <line x1="400" y1="300" x2="228" y2="244" stroke="url(#lineGrad)" stroke-width="4" opacity="0.6"/>
+
+                <!-- Nodo Central -->
+                <circle cx="400" cy="300" r="75" fill="#0b0f19" stroke="#00f2fe" stroke-width="4" filter="url(#glow)"/>
+                <text x="400" y="295" text-anchor="middle" fill="#fff" font-weight="800" font-size="16" class="node-text">SISTEMA DE</text>
+                <text x="400" y="315" text-anchor="middle" fill="#fff" font-weight="800" font-size="16" class="node-text">GOBIERNO</text>
+
+                <!-- Nodo 1: Principios -->
+                <circle cx="400" cy="120" r="55" fill="#1e293b" stroke="#4facfe" stroke-width="3"/>
+                <text x="400" y="125" text-anchor="middle" fill="#f8fafc" font-weight="600" font-size="15" class="node-text">Principios</text>
+
+                <!-- Nodo 2: Políticas -->
+                <circle cx="571" cy="244" r="55" fill="#1e293b" stroke="#4facfe" stroke-width="3"/>
+                <text x="571" y="249" text-anchor="middle" fill="#f8fafc" font-weight="600" font-size="15" class="node-text">Políticas</text>
+
+                <!-- Nodo 3: Procesos -->
+                <circle cx="505" cy="445" r="55" fill="#1e293b" stroke="#4facfe" stroke-width="3"/>
+                <text x="505" y="450" text-anchor="middle" fill="#f8fafc" font-weight="600" font-size="15" class="node-text">Procesos</text>
+
+                <!-- Nodo 4: Estructuras -->
+                <circle cx="294" cy="445" r="55" fill="#1e293b" stroke="#4facfe" stroke-width="3"/>
+                <text x="294" y="440" text-anchor="middle" fill="#f8fafc" font-weight="600" font-size="14" class="node-text">Estructuras</text>
+                <text x="294" y="458" text-anchor="middle" fill="#f8fafc" font-weight="600" font-size="14" class="node-text">Organiz.</text>
+
+                <!-- Nodo 5: Cultura -->
+                <circle cx="228" cy="244" r="55" fill="#1e293b" stroke="#4facfe" stroke-width="3"/>
+                <text x="228" y="249" text-anchor="middle" fill="#f8fafc" font-weight="600" font-size="15" class="node-text">Cultura</text>
+            </svg>
+        </div>
+
+        <!-- Análisis -->
+        <div class="right-panel">
+            <div class="paragraph">
+                <strong>1. Principios</strong>
+                <p>Los principios establecen los valores fundamentales y la filosofía que orientan el comportamiento de la organización frente a la tecnología. En proyectos de TI, actúan como el "norte" estratégico y ético, garantizando que cada iniciativa y decisión de diseño o implementación esté profundamente alineada con el propósito empresarial, reduciendo la ambigüedad y creando un terreno común para todos los stakeholders.</p>
+            </div>
+            <div class="paragraph">
+                <strong>2. Políticas</strong>
+                <p>Las políticas traducen los principios en directrices formales y reglas de cumplimiento obligatorio. Su impacto en los proyectos es vital, ya que proporcionan un marco de control, seguridad y gestión de riesgos. Al contar con políticas claras, los equipos de proyecto evitan desviaciones regulatorias o de seguridad, estandarizando el desarrollo y facilitando auditorías más ágiles y menos disruptivas.</p>
+            </div>
+            <div class="paragraph">
+                <strong>3. Procesos</strong>
+                <p>Los procesos definen el ciclo de vida, las entradas, salidas y actividades organizadas para la entrega de valor. Implementar procesos de gobierno estructurados asegura una gestión eficiente de los recursos y tiempos del proyecto. Esto permite una trazabilidad completa desde la concepción hasta el despliegue, facilitando la monitorización constante para identificar cuellos de botella y mitigar riesgos tempranamente.</p>
+            </div>
+            <div class="paragraph">
+                <strong>4. Estructuras Organizacionales</strong>
+                <p>Las estructuras organizacionales, como los comités de dirección o la PMO, establecen el modelo de autoridad, roles y responsabilidades. Estas entidades son esenciales para la toma de decisiones ágil y la escalación efectiva de problemas críticos. Eliminan los silos operativos al forzar la colaboración entre el negocio y TI, asegurando que los proyectos cuenten con el patrocinio y presupuesto necesarios para su éxito.</p>
+            </div>
+            <div class="paragraph">
+                <strong>5. Cultura, Ética y Comportamiento</strong>
+                <p>La cultura es el componente humano que determina el éxito de cualquier iniciativa. Una cultura corporativa que promueva la transparencia, la mejora continua y la innovación fomenta que los equipos adopten rápidamente nuevas prácticas metodológicas. Reduce drásticamente la resistencia al cambio, incrementando el compromiso colectivo hacia la entrega de soluciones tecnológicas que aporten verdadero valor competitivo.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
